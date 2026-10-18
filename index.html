@@ -1,0 +1,1061 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barangay San Isidro e-Document Request System</title>
+<style>
+:root{
+  --red:#c8102e;--red2:#9c0c24;--bg:#fff;--bg2:#f8f3f3;--tx:#1d1d1f;--mu:#6b6b70;
+  --bd:#e6dcdc;--card:#fff;--ok:#1b7f3b;--warn:#a15c00;--info:#1c5fb8;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#151113;--bg2:#1e181a;--tx:#f4eeee;--mu:#ab9fa2;--bd:#3b2f33;
+    --card:#241c1f;--red:#e0364f;--ok:#58c27a;--warn:#e8a84a;--info:#6da8ff;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151113;--bg2:#1e181a;--tx:#f4eeee;--mu:#ab9fa2;--bd:#3b2f33;
+  --card:#241c1f;--red:#e0364f;--ok:#58c27a;--warn:#e8a84a;--info:#6da8ff;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg2);
+  color:var(--tx);
+  line-height:1.5;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+header{
+  background:var(--card);
+  border-bottom:3px solid var(--red);
+  position:sticky;
+  top:env(safe-area-inset-top,0px);
+  z-index:5;
+}
+.bar{
+  max-width:1000px;
+  margin:0 auto;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.brand{
+  font-weight:700;
+  color:var(--red);
+  font-size:1.05rem;
+  cursor:pointer;
+  margin-right:auto;
+}
+.brand small{
+  display:block;
+  font-weight:400;
+  color:var(--mu);
+  font-size:.72rem;
+}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav button{
+  background:none;
+  border:0;
+  color:var(--tx);
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font:inherit;
+  font-size:.9rem;
+}
+nav button:hover{background:var(--bg2);color:var(--red)}
+main{
+  flex:1;
+  width:100%;
+  max-width:1000px;
+  margin:0 auto;
+  padding:20px 16px;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--bd);
+  border-radius:12px;
+  padding:22px;
+  margin-bottom:18px;
+}
+.hero{text-align:center;padding:56px 20px}
+.hero h1{
+  color:var(--red);
+  margin:0 0 8px;
+  font-size:clamp(1.5rem,4vw,2.2rem);
+}
+.hero p{color:var(--mu);max-width:520px;margin:0 auto 20px}
+h2{color:var(--red);margin:0 0 14px;font-size:1.25rem}
+h3{margin:0 0 10px;font-size:1.05rem}
+label{display:block;font-size:.85rem;font-weight:600;margin:12px 0 4px}
+input,select,textarea{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid var(--bd);
+  border-radius:8px;
+  background:var(--bg);
+  color:var(--tx);
+  font:inherit;
+}
+input:focus,select:focus,textarea:focus{
+  outline:2px solid var(--red);
+  outline-offset:1px;
+}
+.hint{font-size:.75rem;color:var(--mu);margin-top:3px}
+.btn{
+  background:var(--red);
+  color:#fff;
+  border:0;
+  padding:10px 18px;
+  border-radius:8px;
+  font:inherit;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn:hover{background:var(--red2)}
+.btn.sm{padding:5px 10px;font-size:.78rem}
+.btn.ghost{
+  background:none;
+  color:var(--red);
+  border:1px solid var(--red);
+}
+.btn.ghost:hover{background:var(--bg2)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.form{max-width:440px;margin:0 auto}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:12px;
+  margin-bottom:18px;
+}
+.stat{
+  background:var(--card);
+  border:1px solid var(--bd);
+  border-radius:10px;
+  padding:14px;
+  text-align:center;
+}
+.stat b{display:block;font-size:1.7rem;color:var(--red)}
+.stat span{font-size:.8rem;color:var(--mu)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th,td{
+  text-align:left;
+  padding:9px 8px;
+  border-bottom:1px solid var(--bd);
+  vertical-align:middle;
+}
+th{
+  color:var(--mu);
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+.badge{
+  display:inline-block;
+  padding:2px 9px;
+  border-radius:999px;
+  font-size:.74rem;
+  font-weight:600;
+  border:1px solid currentColor;
+  white-space:nowrap;
+}
+.s-Pending{color:var(--warn)}
+.s-Processing{color:var(--info)}
+.s-Verifying{color:#8a3fc0}
+.s-Ready{color:var(--ok)}
+.s-Completed{color:var(--ok)}
+.s-Rejected{color:var(--red)}
+.acts{display:flex;gap:5px;flex-wrap:wrap}
+.pw{list-style:none;padding:0;margin:8px 0 0;font-size:.78rem;color:var(--mu)}
+.pw li:before{content:"○ "}
+.pw li.ok{color:var(--ok)}
+.pw li.ok:before{content:"● "}
+.note{
+  background:var(--bg2);
+  border-left:4px solid var(--red);
+  padding:10px 12px;
+  border-radius:6px;
+  font-size:.85rem;
+  margin-bottom:12px;
+}
+.empty{text-align:center;color:var(--mu);padding:18px}
+.tag{
+  display:inline-block;
+  background:var(--red);
+  color:#fff;
+  font-size:.68rem;
+  font-weight:600;
+  padding:1px 8px;
+  border-radius:999px;
+  margin:2px 3px 0 0;
+}
+footer{
+  background:var(--red);
+  color:#fff;
+  text-align:center;
+  padding:14px;
+  font-size:.8rem;
+}
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  transform:translateX(-50%);
+  background:var(--tx);
+  color:var(--bg);
+  padding:10px 18px;
+  border-radius:8px;
+  font-size:.88rem;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+  z-index:20;
+  max-width:90vw;
+}
+#toast.on{opacity:1}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+.top select,.top input{width:auto;min-width:180px}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="brand" onclick="go('home')">
+      Barangay San Isidro e-Doc
+      <small>Lipa, Batangas</small>
+    </div>
+    <nav id="nav"></nav>
+  </div>
+</header>
+<main id="app"></main>
+<footer>
+  © 2026 Barangay San Isidro, Lipa, Batangas · e-Document Request System · Prototype
+</footer>
+<div id="toast" role="status"></div>
+
+<script>
+const DOCS = [
+  "Barangay Clearance",
+  "Certificate of Indigency - Educational",
+  "Certificate of Indigency - Financial",
+  "Certificate of Indigency - Medical",
+  "Certificate of Indigency - Scholarship",
+  "Certificate of Residency",
+  "Certificate of Solo Parent",
+  "First Time Job Seeker Certificate"
+];
+const FLOW = {
+  Pending: "Processing",
+  Processing: "Verifying",
+  Verifying: "Ready",
+  Ready: "Completed"
+};
+const LBL = { Ready: "Ready to Claim" };
+const KEY = "sanisidro-edoc-v1";
+let mem = null;
+
+function load() {
+  try {
+    const s = localStorage.getItem(KEY);
+    if (s) return JSON.parse(s);
+  } catch (e) {}
+  return mem || { users: [], reqs: [], nid: 1, sid: null };
+}
+
+let db = load();
+let view = "home";
+let fStatus = "All";
+let q = "";
+let citId = null;
+let lm = "email";
+
+function save() {
+  mem = db;
+  try {
+    localStorage.setItem(KEY, JSON.stringify(db));
+  } catch (e) {}
+}
+
+async function hash(s) {
+  const b = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode("sanisidro:" + s)
+  );
+  return [...new Uint8Array(b)]
+    .map(x => x.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+const esc = s =>
+  String(s ?? "").replace(
+    /[&<>"']/g,
+    c =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[c])
+  );
+
+const $ = id => document.getElementById(id);
+
+function toast(m) {
+  const t = $("toast");
+  t.textContent = m;
+  t.classList.add("on");
+  clearTimeout(toast.t);
+  toast.t = setTimeout(() => t.classList.remove("on"), 2800);
+}
+
+const me = () => db.users.find(u => u.id === db.sid);
+
+const pwRules = p => [
+  p.length >= 8,
+  /[A-Z]/.test(p),
+  /[a-z]/.test(p),
+  /\d/.test(p),
+  /[^A-Za-z0-9]/.test(p)
+];
+
+const PWL = [
+  "At least 8 characters",
+  "An uppercase letter (A–Z)",
+  "A lowercase letter (a–z)",
+  "A number (0–9)",
+  "A special character (!@#$%^&*)"
+];
+
+const badge = s =>
+  `<span class="badge s-${s}">${LBL[s] || s}</span>`;
+
+const fmt = t =>
+  new Date(t).toLocaleString("en-PH", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  });
+
+async function seed() {
+  if (!db.users.some(u => u.role === "admin")) {
+    db.users.push({
+      id: 0,
+      role: "admin",
+      first: "Barangay",
+      last: "Admin",
+      email: "admin@sanisidro.local",
+      pass: await hash("Admin@123")
+    });
+    save();
+  }
+}
+
+function go(v) {
+  view = v;
+  render();
+  window.scrollTo(0, 0);
+}
+
+function render() {
+  const u = me();
+  if (!u && ["dash", "edit", "admin", "users", "citizen"].includes(view))
+    view = "login";
+  if (u && ["home", "login", "register"].includes(view))
+    view = u.role === "admin" ? "admin" : "dash";
+
+  $("nav").innerHTML = u
+    ? (u.role === "admin"
+        ? `<button onclick="go('admin')">Dashboard</button>`
+        : `<button onclick="go('dash')">Dashboard</button><button onclick="go('edit')">Edit Account</button>`) +
+      `<button onclick="logout()">Logout</button>`
+    : `<button onclick="go('home')">Home</button><button onclick="go('register')">Register</button><button onclick="go('login')">Login</button>`;
+
+  $("app").innerHTML = {
+    home,
+    login,
+    register,
+    dash,
+    edit,
+    admin,
+    users,
+    citizen
+  }[view]();
+
+  if (view === "register") pwUpdate();
+}
+
+function home() {
+  return `<div class="card hero">
+    <h1>Welcome to the Barangay San Isidro e-Document Request System</h1>
+    <p>Request barangay documents online quickly and securely. Register once, submit your request, and track its progress anytime.</p>
+    <button class="btn" onclick="go('register')">Get Started</button>
+    <button class="btn ghost" onclick="go('login')">Login</button>
+  </div>
+  <div class="card">
+    <h3>Available documents</h3>
+    <ul>${DOCS.map(d => `<li>${d}</li>`).join("")}</ul>
+  </div>`;
+}
+
+function login() {
+  return `<div class="card">
+    <h2 style="text-align:center">Login</h2>
+    <div class="form">
+      <label>Login with</label>
+      <div style="display:flex;gap:18px">
+        <label style="font-weight:400;margin:4px 0">
+          <input type="radio" name="lm" style="width:auto" ${lm === "email" ? "checked" : ""} onchange="setLM('email')"> Email
+        </label>
+        <label style="font-weight:400;margin:4px 0">
+          <input type="radio" name="lm" style="width:auto" ${lm === "phone" ? "checked" : ""} onchange="setLM('phone')"> Mobile number
+        </label>
+      </div>
+      <label for="le">${lm === "email" ? "Email" : "Mobile number"}</label>
+      <input id="le" ${
+        lm === "email"
+          ? 'type="email" autocomplete="username"'
+          : 'type="tel" inputmode="numeric" placeholder="09123456789" autocomplete="tel"'
+      }>
+      <label for="lp">Password</label>
+      <input id="lp" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+      <p style="text-align:center;margin-top:18px">
+        <button class="btn" onclick="doLogin()">Login</button>
+      </p>
+      <p class="hint" style="text-align:center">
+        No account yet? <a href="#" onclick="go('register');return false" style="color:var(--red)">Register</a>
+      </p>
+    </div>
+  </div>`;
+}
+
+async function doLogin() {
+  const e = $("le").value.trim().toLowerCase();
+  const p = $("lp").value;
+  const u =
+    e &&
+    db.users.find(x =>
+      lm === "email" ? x.email === e : x.contact === e
+    );
+  if (!u || u.pass !== (await hash(p)))
+    return toast(
+      "Incorrect " +
+        (lm === "email" ? "email" : "mobile number") +
+        " or password."
+    );
+  db.sid = u.id;
+  save();
+  toast("Welcome, " + u.first + "!");
+  render();
+}
+
+function logout() {
+  db.sid = null;
+  save();
+  view = "home";
+  render();
+  toast("You have been logged out.");
+}
+
+function register() {
+  return `<div class="card">
+    <h2 style="text-align:center">Create Account</h2>
+    <div class="form">
+      <p class="hint" style="text-align:center">Register to start requesting barangay documents.</p>
+      <div class="row">
+        <div>
+          <label for="rf">First name</label>
+          <input id="rf">
+        </div>
+        <div>
+          <label for="rl">Last name</label>
+          <input id="rl">
+        </div>
+      </div>
+      <label for="re">Email</label>
+      <input id="re" type="email">
+      <label for="rn">Mobile number</label>
+      <input id="rn" inputmode="numeric" placeholder="09123456789">
+      <div class="hint">You can log in with either your email or your mobile number.</div>
+      <label for="rp">Password</label>
+      <input id="rp" type="password" oninput="pwUpdate()" autocomplete="new-password">
+      <ul class="pw" id="pwl">${PWL.map(x => `<li>${x}</li>`).join("")}</ul>
+      <label for="rc">Confirm password</label>
+      <input id="rc" type="password" oninput="pwUpdate()" autocomplete="new-password">
+      <p style="text-align:center;margin-top:18px">
+        <button class="btn" id="rb" onclick="doReg()" disabled>Sign Up</button>
+      </p>
+      <p class="hint" style="text-align:center">
+        Already have an account? <a href="#" onclick="go('login');return false" style="color:var(--red)">Sign in</a>
+      </p>
+    </div>
+  </div>`;
+}
+
+function pwUpdate() {
+  const p = $("rp").value;
+  const r = pwRules(p);
+  [...$("pwl").children].forEach((li, i) =>
+    li.classList.toggle("ok", r[i])
+  );
+  $("rb").disabled = !(r.every(Boolean) && p === $("rc").value);
+}
+
+async function doReg() {
+  const f = $("rf").value.trim();
+  const l = $("rl").value.trim();
+  const e = $("re").value.trim().toLowerCase();
+  const n = $("rn").value.trim();
+  if (!f || !l || !/^\S+@\S+\.\S+$/.test(e))
+    return toast("Please enter your name and a valid email.");
+  if (!/^09\d{9}$/.test(n))
+    return toast("Mobile number must be 11 digits starting with 09.");
+  const dup = db.users.filter(u => u.email === e || u.contact === n);
+  if (dup.some(u => u.pass))
+    return toast("That email or mobile number is already registered.");
+  const ex = dup[0];
+  const ph = await hash($("rp").value);
+  if (ex) {
+    Object.assign(ex, {
+      first: f,
+      last: l,
+      email: e,
+      contact: n,
+      pass: ph
+    });
+  } else {
+    db.users.push({
+      id: Date.now(),
+      role: "resident",
+      first: f,
+      last: l,
+      email: e,
+      contact: n,
+      pass: ph,
+      created: Date.now()
+    });
+  }
+  save();
+  toast("Account created! Please log in.");
+  go("login");
+}
+
+function dash() {
+  const u = me();
+  const rs = db.reqs
+    .filter(r => r.uid === u.id)
+    .sort((a, b) => b.at - a.at);
+  const done = rs.filter(r => r.status === "Completed").length;
+  const pend = rs.filter(r =>
+    ["Pending", "Processing", "Verifying", "Ready"].includes(r.status)
+  ).length;
+  return `<div class="card">
+    <h2>Welcome, ${esc(u.first)} ${esc(u.last)}!</h2>
+    <div class="stats" style="margin:0">
+      <div class="stat"><b>${rs.length}</b><span>Total Requests</span></div>
+      <div class="stat"><b>${pend}</b><span>In Progress</span></div>
+      <div class="stat"><b>${done}</b><span>Completed</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Submit Document Request</h2>
+    <div style="max-width:480px">
+      <label for="dt">Document type *</label>
+      <select id="dt">
+        <option value="">Select document</option>
+        ${DOCS.map(d => `<option>${d}</option>`).join("")}
+      </select>
+      <label for="fn">Full name *</label>
+      <input id="fn" value="${esc(u.first + " " + u.last)}">
+      <label for="ad">Address *</label>
+      <input id="ad" value="${esc(u.address || "")}" placeholder="House no., Street, Purok">
+      <div class="hint">At least 5 characters.</div>
+      <label for="ct">Contact number *</label>
+      <input id="ct" value="${esc(u.contact || "")}" placeholder="09123456789" inputmode="numeric">
+      <div class="hint">Exactly 11 digits, starting with 09.</div>
+      <label for="pu">Purpose *</label>
+      <textarea id="pu" rows="3" placeholder="e.g. Employment, scholarship, school enrollment"></textarea>
+      <div class="hint">At least 10 characters.</div>
+      <p><button class="btn" onclick="submitReq()">Submit Request</button></p>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Your Requests</h2>
+    ${
+      rs.length
+        ? `<div class="tw"><table>
+            <tr><th>ID</th><th>Document</th><th>Status</th><th>Date</th></tr>
+            ${rs
+              .map(
+                r =>
+                  `<tr>
+                    <td>${r.id}</td>
+                    <td>${esc(r.doc)}</td>
+                    <td>${badge(r.status)}</td>
+                    <td>${fmt(r.at)}</td>
+                  </tr>`
+              )
+              .join("")}
+          </table></div>`
+        : `<div class="empty">No requests yet.</div>`
+    }
+  </div>`;
+}
+
+function submitReq() {
+  const u = me();
+  const doc = $("dt").value;
+  const fn = $("fn").value.trim();
+  const ad = $("ad").value.trim();
+  const ct = $("ct").value.trim();
+  const pu = $("pu").value.trim();
+  if (!doc || !fn)
+    return toast("Please choose a document and enter your full name.");
+  if (ad.length < 5)
+    return toast("Address must be at least 5 characters.");
+  if (!/^09\d{9}$/.test(ct))
+    return toast("Contact number must be 11 digits starting with 09.");
+  if (pu.length < 10)
+    return toast("Purpose must be at least 10 characters.");
+  const day = new Date().toDateString();
+  if (
+    db.reqs.some(
+      r =>
+        r.uid === u.id &&
+        r.doc === doc &&
+        new Date(r.at).toDateString() === day
+    )
+  )
+    return toast("You already requested this document today.");
+  db.reqs.push({
+    id: db.nid++,
+    uid: u.id,
+    doc,
+    name: fn,
+    address: ad,
+    contact: ct,
+    purpose: pu,
+    status: "Pending",
+    at: Date.now()
+  });
+  u.address = u.address || ad;
+  u.contact = u.contact || ct;
+  save();
+  toast("Request submitted!");
+  render();
+}
+
+function edit() {
+  const u = me();
+  const v = k => esc(u[k] || "");
+  return `<div class="card">
+    <h2 style="text-align:center">Edit Account Information</h2>
+    <div class="form">
+      <div class="note">Please complete your account information to proceed with document requests and ensure all details are accurate.</div>
+      <div class="row">
+        <div>
+          <label>First name</label>
+          <input id="ef" value="${v("first")}">
+        </div>
+        <div>
+          <label>Last name</label>
+          <input id="el" value="${v("last")}">
+        </div>
+      </div>
+      <label>Email</label>
+      <input value="${v("email")}" disabled>
+      <label>Contact number</label>
+      <input id="ec" value="${v("contact")}" inputmode="numeric">
+      <div class="hint">11 digits, starting with 09.</div>
+      <label>New password (leave blank to keep current)</label>
+      <input id="ep" type="password" autocomplete="new-password">
+      <label>Birthdate</label>
+      <input id="eb" type="date" value="${v("birthdate")}">
+      <label>Civil status</label>
+      <select id="es">
+        ${["", "Single", "Married", "Widowed", "Separated"]
+          .map(
+            o =>
+              `<option ${u.civil === o ? "selected" : ""}>${o}</option>`
+          )
+          .join("")}
+      </select>
+      <label>Address</label>
+      <input id="ea" value="${v("address")}">
+      <div class="row">
+        <div>
+          <label>Father’s name</label>
+          <input id="efa" value="${v("father")}">
+        </div>
+        <div>
+          <label>Mother’s name</label>
+          <input id="emo" value="${v("mother")}">
+        </div>
+      </div>
+      <label>Birthplace</label>
+      <input id="ebp" value="${v("birthplace")}">
+      <p>
+        <button class="btn" onclick="saveAcct()">Update Account</button>
+        <button class="btn ghost" onclick="go('dash')">Back to Dashboard</button>
+      </p>
+    </div>
+  </div>`;
+}
+
+async function saveAcct() {
+  const u = me();
+  const c = $("ec").value.trim();
+  const p = $("ep").value;
+  if (c && !/^09\d{9}$/.test(c))
+    return toast("Contact number must be 11 digits starting with 09.");
+  if (c && db.users.some(x => x.contact === c && x.id !== u.id))
+    return toast("That mobile number is already used by another account.");
+  if (p && !pwRules(p).every(Boolean))
+    return toast("New password does not meet the strength rules.");
+  Object.assign(u, {
+    first: $("ef").value.trim() || u.first,
+    last: $("el").value.trim() || u.last,
+    contact: c,
+    birthdate: $("eb").value,
+    civil: $("es").value,
+    address: $("ea").value.trim(),
+    father: $("efa").value.trim(),
+    mother: $("emo").value.trim(),
+    birthplace: $("ebp").value.trim()
+  });
+  if (p) u.pass = await hash(p);
+  save();
+  toast("Account updated.");
+  go("dash");
+}
+
+function admin() {
+  const rs = db.reqs.slice().sort((a, b) => b.at - a.at);
+  const c = s => rs.filter(r => r.status === s).length;
+  const list =
+    fStatus === "All" ? rs : rs.filter(r => r.status === fStatus);
+  return `<div class="card">
+    <h2 style="text-align:center">Admin Dashboard</h2>
+    <p class="hint" style="text-align:center">
+      Total users: ${db.users.filter(u => u.role === "resident").length} | Total requests: ${rs.length}
+    </p>
+    <div class="stats">
+      <div class="stat"><b>${rs.length}</b><span>Total</span></div>
+      <div class="stat"><b>${c("Pending")}</b><span>Pending</span></div>
+      <div class="stat"><b>${c("Processing")}</b><span>Processing</span></div>
+      <div class="stat"><b>${c("Verifying")}</b><span>Verifying</span></div>
+      <div class="stat"><b>${c("Ready")}</b><span>Ready to Claim</span></div>
+      <div class="stat"><b>${c("Completed")}</b><span>Completed</span></div>
+    </div>
+    <p style="text-align:center">
+      <button class="btn" onclick="go('users')">Manage Barangay Residents</button>
+    </p>
+  </div>
+  <div class="card">
+    <div class="top">
+      <h2 style="margin:0">Manage Requests</h2>
+      <select id="fs" onchange="fStatus=this.value;render()">
+        ${["All", "Pending", "Processing", "Verifying", "Ready", "Completed", "Rejected"]
+          .map(
+            s =>
+              `<option value="${s}" ${s === fStatus ? "selected" : ""}>${
+                s === "All" ? "All Status" : LBL[s] || s
+              }</option>`
+          )
+          .join("")}
+      </select>
+    </div>
+    ${
+      list.length
+        ? `<div class="tw"><table>
+            <tr>
+              <th>ID</th><th>Resident</th><th>Document</th><th>Purpose</th>
+              <th>Status</th><th>Submitted</th><th>Actions</th>
+            </tr>
+            ${list
+              .map(r => {
+                const n = FLOW[r.status];
+                return `<tr>
+                  <td>${r.id}</td>
+                  <td>
+                    ${esc(r.name)}
+                    <div class="hint">${esc(r.contact)}</div>
+                    ${tags(db.users.find(x => x.id === r.uid) || {})}
+                  </td>
+                  <td>${esc(r.doc)}</td>
+                  <td>${esc(r.purpose)}</td>
+                  <td>${badge(r.status)}</td>
+                  <td>${fmt(r.at)}</td>
+                  <td>
+                    <div class="acts">
+                      ${
+                        n
+                          ? `<button class="btn sm" onclick="setS(${r.id},'${n}')">${
+                              r.status === "Pending"
+                                ? "Accept"
+                                : "Mark " + (LBL[n] || n)
+                            }</button>`
+                          : ""
+                      }
+                      ${
+                        r.status === "Pending"
+                          ? `<button class="btn sm ghost" onclick="setS(${r.id},'Rejected')">Reject</button>`
+                          : ""
+                      }
+                      <button class="btn sm ghost" onclick="delReq(${r.id})">Delete</button>
+                    </div>
+                  </td>
+                </tr>`;
+              })
+              .join("")}
+          </table></div>`
+        : `<div class="empty">No records found.</div>`
+    }
+  </div>`;
+}
+
+function setS(id, s) {
+  const r = db.reqs.find(x => x.id === id);
+  r.status = s;
+  save();
+  toast("Request #" + id + " marked " + (LBL[s] || s) + ".");
+  render();
+}
+
+function delReq(id) {
+  if (!confirm("Delete request #" + id + "? This cannot be undone.")) return;
+  db.reqs = db.reqs.filter(r => r.id !== id);
+  save();
+  toast("Request deleted.");
+  render();
+}
+
+function users() {
+  const us = db.users.filter(
+    u =>
+      u.role === "resident" &&
+      (`${u.first} ${u.last} ${u.email}`).toLowerCase().includes(q.toLowerCase())
+  );
+  return `<div class="card">
+    <div class="top">
+      <h2 style="margin:0">Barangay Residents</h2>
+      <button class="btn" onclick="newCit()">+ Register Citizen</button>
+      <input
+        placeholder="Search name or email"
+        value="${esc(q)}"
+        oninput="q=this.value;render();const i=document.querySelector('.top input');i.focus();i.setSelectionRange(q.length,q.length)"
+      >
+    </div>
+    ${
+      us.length
+        ? `<div class="tw"><table>
+            <tr>
+              <th>Name</th><th>Contact</th><th>Address</th>
+              <th>Classification / Description</th><th>Account</th><th>Actions</th>
+            </tr>
+            ${us
+              .map(
+                u => `<tr>
+                  <td>
+                    ${esc(u.first)} ${esc(u.last)}
+                    <div class="hint">${esc(u.email || "No email")}</div>
+                  </td>
+                  <td>${esc(u.contact || "—")}</td>
+                  <td>${esc(u.address || "—")}</td>
+                  <td>
+                    ${tags(u) || "—"}
+                    ${u.desc ? `<div class="hint">${esc(u.desc)}</div>` : ""}
+                  </td>
+                  <td>${u.pass ? "Has login" : "Record only"}</td>
+                  <td>
+                    <div class="acts">
+                      <button class="btn sm" onclick="editCit(${u.id})">Edit</button>
+                      <button class="btn sm ghost" onclick="delCit(${u.id})">Delete</button>
+                    </div>
+                  </td>
+                </tr>`
+              )
+              .join("")}
+          </table></div>`
+        : `<div class="empty">No residents found.</div>`
+    }
+    <p><button class="btn ghost" onclick="go('admin')">Back to Dashboard</button></p>
+  </div>`;
+}
+
+function setLM(m) {
+  lm = m;
+  render();
+}
+
+const tags = u =>
+  [
+    u.solo ? "Solo Parent" : "",
+    u.pwd ? "PWD" : "",
+    u.student ? "Student" : "",
+    u.wstudent ? "Working Student" : ""
+  ]
+    .filter(Boolean)
+    .map(t => `<span class="tag">${t}</span>`)
+    .join(" ");
+
+function newCit() {
+  citId = null;
+  go("citizen");
+}
+
+function editCit(id) {
+  citId = id;
+  go("citizen");
+}
+
+function citizen() {
+  const u = db.users.find(x => x.id === citId) || {};
+  const v = k => esc(u[k] || "");
+  return `<div class="card">
+    <h2>${citId ? "Edit" : "Register"} Citizen</h2>
+    <div style="max-width:520px">
+      <div class="row">
+        <div>
+          <label>First name *</label>
+          <input id="cf" value="${v("first")}">
+        </div>
+        <div>
+          <label>Last name *</label>
+          <input id="cl" value="${v("last")}">
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Birthdate</label>
+          <input id="cb" type="date" value="${v("birthdate")}">
+        </div>
+        <div>
+          <label>Civil status</label>
+          <select id="cs">
+            ${["", "Single", "Married", "Widowed", "Separated"]
+              .map(
+                o =>
+                  `<option ${u.civil === o ? "selected" : ""}>${o}</option>`
+              )
+              .join("")}
+          </select>
+        </div>
+      </div>
+      <label>Address *</label>
+      <input id="ca" value="${v("address")}" placeholder="House no., Street, Purok">
+      <div class="row">
+        <div>
+          <label>Contact number</label>
+          <input id="cc" value="${v("contact")}" inputmode="numeric">
+        </div>
+        <div>
+          <label>Email (optional)</label>
+          <input id="ce" type="email" value="${v("email")}">
+        </div>
+      </div>
+      <label>Classification</label>
+      <label style="font-weight:400">
+        <input type="checkbox" id="cso" style="width:auto" ${u.solo ? "checked" : ""}> Solo / Single Parent
+      </label>
+      <label style="font-weight:400">
+        <input type="checkbox" id="cpw" style="width:auto" ${u.pwd ? "checked" : ""}> Person with Disability (PWD)
+      </label>
+      <label style="font-weight:400">
+        <input type="checkbox" id="cst" style="width:auto" ${u.student ? "checked" : ""}> Student
+      </label>
+      <label style="font-weight:400">
+        <input type="checkbox" id="cws" style="width:auto" ${u.wstudent ? "checked" : ""}> Working Student
+      </label>
+      <label>Description / Remarks</label>
+      <textarea id="cd" rows="3" placeholder="e.g. Solo parent of 2 children since 2022; PWD ID no. and type of disability">${v("desc")}</textarea>
+      <p>
+        <button class="btn" onclick="saveCit()">${citId ? "Save Changes" : "Register Citizen"}</button>
+        <button class="btn ghost" onclick="go('users')">Cancel</button>
+      </p>
+    </div>
+  </div>`;
+}
+
+function saveCit() {
+  const f = $("cf").value.trim();
+  const l = $("cl").value.trim();
+  const a = $("ca").value.trim();
+  const c = $("cc").value.trim();
+  const e = $("ce").value.trim().toLowerCase();
+  if (!f || !l || a.length < 5)
+    return toast("First name, last name and address are required.");
+  if (c && !/^09\d{9}$/.test(c))
+    return toast("Contact number must be 11 digits starting with 09.");
+  if (e && db.users.some(x => x.email === e && x.id !== citId))
+    return toast("That email is already used by another record.");
+  if (c && db.users.some(x => x.contact === c && x.id !== citId))
+    return toast("That mobile number is already used by another record.");
+  const d = {
+    first: f,
+    last: l,
+    address: a,
+    contact: c,
+    email: e,
+    birthdate: $("cb").value,
+    civil: $("cs").value,
+    solo: $("cso").checked,
+    pwd: $("cpw").checked,
+    student: $("cst").checked,
+    wstudent: $("cws").checked,
+    desc: $("cd").value.trim()
+  };
+  if (citId) {
+    Object.assign(db.users.find(x => x.id === citId), d);
+  } else {
+    db.users.push({
+      id: Date.now(),
+      role: "resident",
+      pass: "",
+      created: Date.now(),
+      ...d
+    });
+  }
+  save();
+  toast(citId ? "Citizen record updated." : "Citizen registered.");
+  go("users");
+}
+
+function delCit(id) {
+  const u = db.users.find(x => x.id === id);
+  if (!confirm("Delete " + u.first + " " + u.last + " and their requests?"))
+    return;
+  db.users = db.users.filter(x => x.id !== id);
+  db.reqs = db.reqs.filter(r => r.uid !== id);
+  save();
+  toast("Record deleted.");
+  render();
+}
+
+seed().then(render);
+</script>
+</body>
+</html>
